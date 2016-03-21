@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.dshm.dao.interfaces.EbillingShmTableInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TABLE_ID" property="tableId" jdbcType="INTEGER" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="INTEGER" />
+    <result column="INDEX_KEY" property="indexKey" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="INDEX_MODE" property="indexMode" jdbcType="INTEGER" />
+    <result column="STORAGE_TYPE" property="storageType" jdbcType="INTEGER" />
+    <result column="INDEX_COUNT" property="indexCount" jdbcType="BIGINT" />
+    <result column="DATA_COUNT" property="dataCount" jdbcType="BIGINT" />
+    <result column="IS_PARA" property="isPara" jdbcType="INTEGER" />
+    <result column="INDEX_ID" property="indexId" jdbcType="INTEGER" />
+    <result column="HASH_TYPE" property="hashType" jdbcType="INTEGER" />
+    <result column="LESSEE_NAME" property="lesseeName" jdbcType="VARCHAR" />
+    <result column="DB_CONNECT" property="dbConnect" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="CHAR" />
+    <result column="table_key" property="tableKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TABLE_ID, IS_ENABLE, INDEX_KEY, TABLE_NAME, INDEX_MODE, STORAGE_TYPE, INDEX_COUNT, 
+    DATA_COUNT, IS_PARA, INDEX_ID, HASH_TYPE, LESSEE_NAME, DB_CONNECT, tenant_id, table_key
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ebilling_shm_table_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ebilling_shm_table_info
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from ebilling_shm_table_info
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfoCriteria" >
+    delete from ebilling_shm_table_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfo" >
+    insert into ebilling_shm_table_info (ID, TABLE_ID, IS_ENABLE, 
+      INDEX_KEY, TABLE_NAME, INDEX_MODE, 
+      STORAGE_TYPE, INDEX_COUNT, DATA_COUNT, 
+      IS_PARA, INDEX_ID, HASH_TYPE, 
+      LESSEE_NAME, DB_CONNECT, tenant_id, 
+      table_key)
+    values (#{id,jdbcType=INTEGER}, #{tableId,jdbcType=INTEGER}, #{isEnable,jdbcType=INTEGER}, 
+      #{indexKey,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{indexMode,jdbcType=INTEGER}, 
+      #{storageType,jdbcType=INTEGER}, #{indexCount,jdbcType=BIGINT}, #{dataCount,jdbcType=BIGINT}, 
+      #{isPara,jdbcType=INTEGER}, #{indexId,jdbcType=INTEGER}, #{hashType,jdbcType=INTEGER}, 
+      #{lesseeName,jdbcType=VARCHAR}, #{dbConnect,jdbcType=VARCHAR}, #{tenantId,jdbcType=CHAR}, 
+      #{tableKey,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfo" >
+    insert into ebilling_shm_table_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tableId != null" >
+        TABLE_ID,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="indexKey != null" >
+        INDEX_KEY,
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="indexMode != null" >
+        INDEX_MODE,
+      </if>
+      <if test="storageType != null" >
+        STORAGE_TYPE,
+      </if>
+      <if test="indexCount != null" >
+        INDEX_COUNT,
+      </if>
+      <if test="dataCount != null" >
+        DATA_COUNT,
+      </if>
+      <if test="isPara != null" >
+        IS_PARA,
+      </if>
+      <if test="indexId != null" >
+        INDEX_ID,
+      </if>
+      <if test="hashType != null" >
+        HASH_TYPE,
+      </if>
+      <if test="lesseeName != null" >
+        LESSEE_NAME,
+      </if>
+      <if test="dbConnect != null" >
+        DB_CONNECT,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="tableKey != null" >
+        table_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tableId != null" >
+        #{tableId,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="indexKey != null" >
+        #{indexKey,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexMode != null" >
+        #{indexMode,jdbcType=INTEGER},
+      </if>
+      <if test="storageType != null" >
+        #{storageType,jdbcType=INTEGER},
+      </if>
+      <if test="indexCount != null" >
+        #{indexCount,jdbcType=BIGINT},
+      </if>
+      <if test="dataCount != null" >
+        #{dataCount,jdbcType=BIGINT},
+      </if>
+      <if test="isPara != null" >
+        #{isPara,jdbcType=INTEGER},
+      </if>
+      <if test="indexId != null" >
+        #{indexId,jdbcType=INTEGER},
+      </if>
+      <if test="hashType != null" >
+        #{hashType,jdbcType=INTEGER},
+      </if>
+      <if test="lesseeName != null" >
+        #{lesseeName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbConnect != null" >
+        #{dbConnect,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=CHAR},
+      </if>
+      <if test="tableKey != null" >
+        #{tableKey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from ebilling_shm_table_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ebilling_shm_table_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tableId != null" >
+        TABLE_ID = #{record.tableId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isEnable != null" >
+        IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="record.indexKey != null" >
+        INDEX_KEY = #{record.indexKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null" >
+        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexMode != null" >
+        INDEX_MODE = #{record.indexMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.storageType != null" >
+        STORAGE_TYPE = #{record.storageType,jdbcType=INTEGER},
+      </if>
+      <if test="record.indexCount != null" >
+        INDEX_COUNT = #{record.indexCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.dataCount != null" >
+        DATA_COUNT = #{record.dataCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.isPara != null" >
+        IS_PARA = #{record.isPara,jdbcType=INTEGER},
+      </if>
+      <if test="record.indexId != null" >
+        INDEX_ID = #{record.indexId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hashType != null" >
+        HASH_TYPE = #{record.hashType,jdbcType=INTEGER},
+      </if>
+      <if test="record.lesseeName != null" >
+        LESSEE_NAME = #{record.lesseeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbConnect != null" >
+        DB_CONNECT = #{record.dbConnect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=CHAR},
+      </if>
+      <if test="record.tableKey != null" >
+        table_key = #{record.tableKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ebilling_shm_table_info
+    set ID = #{record.id,jdbcType=INTEGER},
+      TABLE_ID = #{record.tableId,jdbcType=INTEGER},
+      IS_ENABLE = #{record.isEnable,jdbcType=INTEGER},
+      INDEX_KEY = #{record.indexKey,jdbcType=VARCHAR},
+      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      INDEX_MODE = #{record.indexMode,jdbcType=INTEGER},
+      STORAGE_TYPE = #{record.storageType,jdbcType=INTEGER},
+      INDEX_COUNT = #{record.indexCount,jdbcType=BIGINT},
+      DATA_COUNT = #{record.dataCount,jdbcType=BIGINT},
+      IS_PARA = #{record.isPara,jdbcType=INTEGER},
+      INDEX_ID = #{record.indexId,jdbcType=INTEGER},
+      HASH_TYPE = #{record.hashType,jdbcType=INTEGER},
+      LESSEE_NAME = #{record.lesseeName,jdbcType=VARCHAR},
+      DB_CONNECT = #{record.dbConnect,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=CHAR},
+      table_key = #{record.tableKey,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfo" >
+    update ebilling_shm_table_info
+    <set >
+      <if test="tableId != null" >
+        TABLE_ID = #{tableId,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      </if>
+      <if test="indexKey != null" >
+        INDEX_KEY = #{indexKey,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexMode != null" >
+        INDEX_MODE = #{indexMode,jdbcType=INTEGER},
+      </if>
+      <if test="storageType != null" >
+        STORAGE_TYPE = #{storageType,jdbcType=INTEGER},
+      </if>
+      <if test="indexCount != null" >
+        INDEX_COUNT = #{indexCount,jdbcType=BIGINT},
+      </if>
+      <if test="dataCount != null" >
+        DATA_COUNT = #{dataCount,jdbcType=BIGINT},
+      </if>
+      <if test="isPara != null" >
+        IS_PARA = #{isPara,jdbcType=INTEGER},
+      </if>
+      <if test="indexId != null" >
+        INDEX_ID = #{indexId,jdbcType=INTEGER},
+      </if>
+      <if test="hashType != null" >
+        HASH_TYPE = #{hashType,jdbcType=INTEGER},
+      </if>
+      <if test="lesseeName != null" >
+        LESSEE_NAME = #{lesseeName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbConnect != null" >
+        DB_CONNECT = #{dbConnect,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=CHAR},
+      </if>
+      <if test="tableKey != null" >
+        table_key = #{tableKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableInfo" >
+    update ebilling_shm_table_info
+    set TABLE_ID = #{tableId,jdbcType=INTEGER},
+      IS_ENABLE = #{isEnable,jdbcType=INTEGER},
+      INDEX_KEY = #{indexKey,jdbcType=VARCHAR},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      INDEX_MODE = #{indexMode,jdbcType=INTEGER},
+      STORAGE_TYPE = #{storageType,jdbcType=INTEGER},
+      INDEX_COUNT = #{indexCount,jdbcType=BIGINT},
+      DATA_COUNT = #{dataCount,jdbcType=BIGINT},
+      IS_PARA = #{isPara,jdbcType=INTEGER},
+      INDEX_ID = #{indexId,jdbcType=INTEGER},
+      HASH_TYPE = #{hashType,jdbcType=INTEGER},
+      LESSEE_NAME = #{lesseeName,jdbcType=VARCHAR},
+      DB_CONNECT = #{dbConnect,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=CHAR},
+      table_key = #{tableKey,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

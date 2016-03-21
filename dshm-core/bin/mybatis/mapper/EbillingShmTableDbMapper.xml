@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.dshm.dao.interfaces.EbillingShmTableDbMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDb" >
+    <id column="DB_CONNECT" property="dbConnect" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="PASS_WORD" property="passWord" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="DRIVER_CLASS_NAME" property="driverClassName" jdbcType="VARCHAR" />
+    <result column="DB_TYPE" property="dbType" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DB_CONNECT, ID, USER_NAME, PASS_WORD, URL, DRIVER_CLASS_NAME, DB_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDbCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ebilling_shm_table_db
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ebilling_shm_table_db
+    where DB_CONNECT = #{dbConnect,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ebilling_shm_table_db
+    where DB_CONNECT = #{dbConnect,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDbCriteria" >
+    delete from ebilling_shm_table_db
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDb" >
+    insert into ebilling_shm_table_db (DB_CONNECT, ID, USER_NAME, 
+      PASS_WORD, URL, DRIVER_CLASS_NAME, 
+      DB_TYPE)
+    values (#{dbConnect,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{passWord,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{driverClassName,jdbcType=VARCHAR}, 
+      #{dbType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDb" >
+    insert into ebilling_shm_table_db
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dbConnect != null" >
+        DB_CONNECT,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="passWord != null" >
+        PASS_WORD,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="driverClassName != null" >
+        DRIVER_CLASS_NAME,
+      </if>
+      <if test="dbType != null" >
+        DB_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dbConnect != null" >
+        #{dbConnect,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="driverClassName != null" >
+        #{driverClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbType != null" >
+        #{dbType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDbCriteria" resultType="java.lang.Integer" >
+    select count(*) from ebilling_shm_table_db
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ebilling_shm_table_db
+    <set >
+      <if test="record.dbConnect != null" >
+        DB_CONNECT = #{record.dbConnect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passWord != null" >
+        PASS_WORD = #{record.passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverClassName != null" >
+        DRIVER_CLASS_NAME = #{record.driverClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbType != null" >
+        DB_TYPE = #{record.dbType,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ebilling_shm_table_db
+    set DB_CONNECT = #{record.dbConnect,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=INTEGER},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      PASS_WORD = #{record.passWord,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      DRIVER_CLASS_NAME = #{record.driverClassName,jdbcType=VARCHAR},
+      DB_TYPE = #{record.dbType,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDb" >
+    update ebilling_shm_table_db
+    <set >
+      <if test="id != null" >
+        ID = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null" >
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="driverClassName != null" >
+        DRIVER_CLASS_NAME = #{driverClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbType != null" >
+        DB_TYPE = #{dbType,jdbcType=CHAR},
+      </if>
+    </set>
+    where DB_CONNECT = #{dbConnect,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.dshm.dao.mapper.bo.EbillingShmTableDb" >
+    update ebilling_shm_table_db
+    set ID = #{id,jdbcType=INTEGER},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      DRIVER_CLASS_NAME = #{driverClassName,jdbcType=VARCHAR},
+      DB_TYPE = #{dbType,jdbcType=CHAR}
+    where DB_CONNECT = #{dbConnect,jdbcType=VARCHAR}
+  </update>
+</mapper>
